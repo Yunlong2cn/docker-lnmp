@@ -10,8 +10,8 @@ services:
     environment:
       - VIRTUAL_HOST = whoami.local
     links:
-      - php-fpm:__DOCKER_PHP_FPM__
-  php-fpm:
+      - php:__DOCKER_PHP_FPM__
+  php:
     build: ./php-fpm/
     ports:
       - "9000:9000"

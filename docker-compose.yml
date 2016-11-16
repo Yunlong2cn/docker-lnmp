@@ -1,37 +1,35 @@
-version: "2"
-services:
-  nginx:
-    image: nginx
-    volumes:
-      # nginx configs
-      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-      # www
-      - ./www:/usr/share/nginx/html:ro
-    environment:
-      - VIRTUAL_HOST = whoami.local
-    links:
-      - php:__DOCKER_PHP_FPM__
-  php:
-    build: ./php-fpm/
-    ports:
-      - "9000:9000"
-    volumes:
-      - ./www:/usr/share/nginx/html
-      # php.ini
-      - ./php/php.ini-production:/usr/local/etc/php/php.ini:ro
-    links:
-      - mysql:mysql-host
-  mysql:
-    image: mysql/mysql-server
-    volumes: 
-      - ./mysql:/var/lib/mysql
-    environment:
-      - MYSQL_ROOT_PASSWORD = 123321
-    ports:
-      - "8806:3306"
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin
-    links:
-      - mysql:db
-    environment:
-      - VIRTUAL_HOST = phpmyadmin.io
+nginx:
+  image: nginx
+  volumes:
+    # nginx configs
+    - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
+    # www
+    - ./www:/usr/share/nginx/html:ro
+  environment:
+    - VIRTUAL_HOST = whoami.io
+  links:
+    - php:__DOCKER_PHP_FPM__
+php:
+  build: ./php-fpm/
+  ports:
+    - "9000:9000"
+  volumes:
+    - ./www:/usr/share/nginx/html
+    # php.ini
+    - ./php/php.ini-production:/usr/local/etc/php/php.ini:ro
+  links:
+    - mysql:mysql-host
+mysql:
+  image: mysql/mysql-server
+  volumes: 
+    - ./mysql:/var/lib/mysql
+  environment:
+    - MYSQL_ROOT_PASSWORD = 123321
+  ports:
+    - "8806:3306"
+phpmyadmin:
+  image: phpmyadmin/phpmyadmin
+  links:
+    - mysql:db
+  environment:
+    - VIRTUAL_HOST = phpmyadmin.io

@@ -34,4 +34,4 @@ services:
     links:
       - mysql:db
     environment:
-      - VIRTUAL_HOST = phpmyadmin.local
+      - VIRTUAL_HOST = phpmyadmin.io

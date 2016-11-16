@@ -6,7 +6,7 @@ nginx:
     # www
     - ./www:/usr/share/nginx/html:ro
   environment:
-    - VIRTUAL_HOST = whoami.io
+    - VIRTUAL_HOST=whoami.io
   links:
     - php:__DOCKER_PHP_FPM__
 php:
@@ -24,7 +24,7 @@ mysql:
   volumes: 
     - ./mysql:/var/lib/mysql
   environment:
-    - MYSQL_ROOT_PASSWORD = 123321
+    - MYSQL_ROOT_PASSWORD=123321
   ports:
     - "8806:3306"
 phpmyadmin:
@@ -32,4 +32,4 @@ phpmyadmin:
   links:
     - mysql:db
   environment:
-    - VIRTUAL_HOST = phpmyadmin.io
+    - VIRTUAL_HOST=phpmyadmin.io
